@@ -4,7 +4,7 @@ from scripts.helper_functions import generate_equation
 app = Flask(__name__)
 app.secret_key = 'BDd82s9fh1f1bc2inbBAsb9SBDYE6d06vc0cduc'  # Required when using session
 
-question_total = 5
+question_total = 3
 
 @app.route("/")
 def home():
@@ -40,7 +40,10 @@ def question():
 def result():
     score = session['score']
     percentage = (score / question_total) * 100
-    return render_template('result.html', score=score, maximum_score=question_total, percentage=percentage)
+
+    percentage_display = int(percentage) if percentage.is_integer() else round(percentage, 1)
+
+    return render_template('result.html', score=score, maximum_score=question_total, percentage=percentage_display)
 
 if __name__ == '__main__':
     app.run(debug=True)
