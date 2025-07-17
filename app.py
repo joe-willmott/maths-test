@@ -1,27 +1,46 @@
+from flask import Flask, render_template, session, request, url_for, redirect
 from scripts.helper_functions import generate_equation
 
+app = Flask(__name__)
+app.secret_key = 'BDd82s9fh1f1bc2inbBAsb9SBDYE6d06vc0cduc'  # Required when using session
+
 question_total = 5
-question_count = 0
-score = 0
 
-while question_count < question_total:
+@app.route("/")
+def home():
+    session['score'] = 0
+    session['question_count'] = 0
+    return render_template("index.html")
 
-    question, answer = generate_equation()
+@app.route('/question', methods=['GET', 'POST'])
+def question():
+    feedback = ''
+    if request.method == 'POST':
+        user_response = request.form['answer']
 
-    print(question)
-    user_response = input("What is x in the equstion above?")
+        try:
+            if int(user_response) == session['answer']:
+                feedback = "Correct!"
+                session['score'] += 1
+            else:
+                feedback = f"Wrong, the correct answer is {session['answer']}."
+        except ValueError:
+            feedback = f"Invalid input. Please enter an integer. The correct answer is {session['answer']}."
+        
+        session['question_count'] += 1
 
-    try:
-        if int(user_response) == answer:
-            print("Correct!")
-            score += 1
-        else:
-            print(f"Wrong, the correct answer is {answer}.")
-    except ValueError as err:
-        print(f"Invalid input. Please enter an integer. The correct answer is {answer}.")
+    if session['question_count'] > question_total:
+        return redirect(url_for('result'))
     
-    question_count += 1
+    session['question'], session['answer'] = generate_equation()
 
-percentage = (score / question_total) * 100
+    return render_template("question.html", question=session['question'], feedback=feedback)
 
-print(f"Test complete. Your score is {score}/{question_total}. That's {percentage}%")
+@app.route('/result')
+def result():
+    score = session['score']
+    percentage = (score / question_total) * 100
+    return render_template('result.html', score=score, maximum_score=question_total, percentage=percentage)
+
+if __name__ == '__main__':
+    app.run(debug=True)
