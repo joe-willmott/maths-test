@@ -29,7 +29,7 @@ def question():
         
         session['question_count'] += 1
 
-    if session['question_count'] > question_total:
+    if session['question_count'] >= question_total:
         return redirect(url_for('result'))
     
     session['question'], session['answer'] = generate_equation()
