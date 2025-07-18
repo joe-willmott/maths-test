@@ -4,7 +4,7 @@ from scripts.helper_functions import generate_equation
 app = Flask(__name__)
 app.secret_key = 'BDd82s9fh1f1bc2inbBAsb9SBDYE6d06vc0cduc'  # Required when using session
 
-question_total = 3
+question_total = 10
 
 @app.route("/")
 def home():
