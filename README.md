@@ -6,7 +6,10 @@ The app can be accessed at https://maths-test.onrender.com
 
 ## Local Development
 
-To run this project on your local machine, clone the repo to your machine and create a python virtual environment.
+To run this project on your local machine, clone the repo to your machine and create a python virtual environment. You can clone the repository with the following command:
+```bash
+git clone https://github.com/joe-willmott/maths-test.git
+```
 
 The only library required to run this app locally is flask, currently pinned at version 3.1.1. To install this dependency, create a virtual environment from the requirements.txt file, or run the following command in the terminal:
 ```powershell
