@@ -47,3 +47,18 @@ pip install gunicorn==23.0.0
 You should not need to install this library to run the app locally, but it is included in the requirements.txt file so that render.com installs it prior to redeploying the live app.
 
 The app goes to sleep when not in use, so it may take some time to start up when visiting the page. Redeploying the app makes it start up, so you can test very quickly after the app is fully deployed.
+
+## Using the App
+
+Go to https://maths-test.onrender.com
+
+Click the 'Start the test' button.
+
+Each question requires the user to provide th missing value (x) in the equation.
+
+If the user gives the correct answer, their score increases by 1. If they give an incorrect or invalid answer, their score remains unchanged and they move onto the next question.
+
+There are 10 questions in total, and the user receives a score out of 10 and a percentage at the end of the test.
+
+## About the Code
+
