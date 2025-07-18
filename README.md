@@ -62,3 +62,33 @@ There are 10 questions in total, and the user receives a score out of 10 and a p
 
 ## About the Code
 
+The app uses flask's session functionality to create session-level variables:
+* score
+* question_count
+* answer
+* question
+
+When using session-level vriables, the app must use a secret_key. his is defined in app.py.
+
+There are 3 routes in the app:
+* "/"
+* "/question"
+* "/result"
+
+The "/" route is the home page and uses the index.html template. This page simply contains a welcome title and a button to start the test.
+
+When the button is clicked, it takes the user to the "/question" page. The app uses flask's url_for function to get the URL for the "question" function. This allows the route names to be dynamic, as long as the function within each route remains the same.
+
+When the "question" page is loaded, it calls the question() function with a GET method. If the number of questions answered is less than the maximum number of questions, currently set at 10, it will generate a question and render the question.html template with the question and feedback strings as parameters. At this point, feedback is just an empty string. When the function generates a question, calls the generate_equation() function in "scripts/helper_functions.py". This function takes no inputs but returns a tuple of 2 items: the question string and the correct answer. After the equation is generated, the question() function stores the question and answer in session-level variables.
+
+When the user clicks the 'Submit' button on the "/question" page, it will submit the answer they've inputted. This button triggers the question() function with a POST method. The function recognises the POST method and compares the user input to the answer stored in the session-level variable. It marks the answer, catching value errors if the input can't be converted to an integer, and stores the feedback in the feedback variable, which is subsequently displayed on the "/question" page when the page is re-rendered.
+
+If the number of questions answered is greater than or equal to the maximum number of questions, it will redirect the user to the "/result" page.
+
+The "/result" page uses the result.html template and shows a score out of 10 and, their score conerted to a percentage. It also shows a link to take them back to the home page to restart the test.
+
+The percentage is calculated in the result() function withing the "/result" route. it uses the session-level variable "score" and the maximum number of questions, currently set at 10. It will convert the percentage to an integer if it's a whole number, otherwise it will show as a float. This is just for readability.
+
+All templates use the same styles.css file as a stylesheet.
+
+The app runs with debugging enabled to help troubleshoot any potential issues
