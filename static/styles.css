@@ -14,16 +14,32 @@ body {
 
 a, p {
     color: white;
-    font-size: 18px;
+    font-size: 22px;
 }
 
 button {
     background-color: white;
     border: none;
     border-radius: 2px;
-    padding: 5px 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+    padding-left: 10px;
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
+    font-family: 'Tahoma';
+    color: #212121;
+}
+
+input {
+    background-color: white;
+    border: none;
+    border-radius: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    margin-right: 4px;
+    font-size: 18px;
     font-family: 'Tahoma';
     color: #212121;
 }
