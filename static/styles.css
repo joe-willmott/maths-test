@@ -1,9 +1,28 @@
 body {
+    height: 100vh;
     background-color: #212121;
     color: white;
     font-family: 'Tahoma';
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.container {
+    text-align: center;
 }
 
 a {
     color: white;
+}
+
+button {
+    background-color: #e2e8f0;
+    border: none;
+    border-radius: 2px;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Tahoma';
+    color: #212121;
 }
